@@ -1,13 +1,15 @@
+import { ChakraProvider, Container } from '@chakra-ui/react'
 import Header from "./components/Header"
-import { Container } from "react-bootstrap";
 import Coins from "./components/Coins";
 
 function App() {
   return (
-    <Container className="mx-auto">
-      <Header />
-      <Coins />
-    </Container>
+    <ChakraProvider>
+      <Container maxW='550px'>
+        <Header />
+        <Coins />
+      </Container>
+    </ChakraProvider>
   );
 }
 
