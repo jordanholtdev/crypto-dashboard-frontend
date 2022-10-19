@@ -1,15 +1,17 @@
 import { ChakraProvider, Container } from '@chakra-ui/react'
 import Header from "./Header"
 import { Routes, Route } from 'react-router-dom';
-import Coins from './Coins';
+import CoinList from './CoinList';
+import CoinInfo from './CoinInfo';
 
 function App() {
   return (
     <ChakraProvider>
-      <Container maxW='550px'>
+      <Container maxW='850px'>
         <Header />
         <Routes>
-          <Route path='/' element={<Coins />} />
+          <Route path='/' element={<CoinList />} />
+          <Route path='/info' element={<CoinInfo />} />
         </Routes>
       </Container>
     </ChakraProvider>
