@@ -1,9 +1,20 @@
 import React from "react";
-
+import { fetchCoins } from "../actions";
 class Coins extends React.Component {
+    state = { coins: [] }
+
+    componentDidMount() {
+        fetchCoins().then(res => {
+            console.log(res)
+            this.setState({
+                coins: res
+            });
+        });
+    }
+
     render() {
         return (
-            <div>This is a list of coins</div>
+            <div>Coin list</div>
         )
     }
 }
