@@ -9,7 +9,9 @@ import {
     Stat,
     StatLabel,
     StatNumber,
+    StatArrow,
     StatHelpText,
+    Avatar,
     StatGroup,
 } from '@chakra-ui/react'
 
@@ -19,7 +21,6 @@ class CoinList extends React.Component {
 
     componentDidMount() {
         fetchCoins().then(res => {
-            console.log(res)
             this.setState({
                 coins: res,
                 isLoaded: true
@@ -27,6 +28,18 @@ class CoinList extends React.Component {
         });
     }
 
+    renderDate = (date) => {
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC',
+            hour: 'numeric'
+        }
+        const formatDate = new Date(date)
+        return formatDate.toLocaleString('en-US', options)
+    }
 
     renderList() {
         return this.state.coins.map((coin) => {
@@ -35,20 +48,26 @@ class CoinList extends React.Component {
                     <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
                         <StatGroup>
                             <Stat>
-                                <Text as='b' fontSize='md'>{coin.coin_id}</Text>
-                                <StatHelpText>{coin.created_date}</StatHelpText>
+                                <Avatar size='xs' src={coin.image} />
+                                <Text paddingLeft={2} as='b' fontSize='md'>{coin.name}</Text>
                             </Stat>
-                            <Stat>
+                            <Stat px={2}>
                                 <StatLabel>Price (USD)</StatLabel>
                                 <StatNumber>${coin.price_usd}</StatNumber>
+                                <StatHelpText>{this.renderDate(coin.created_date)}</StatHelpText>
                             </Stat>
-                            <Stat>
+                            <Stat px={2}>
                                 <StatLabel>Market Cap</StatLabel>
                                 <StatNumber>${coin.market_cap.toLocaleString()}</StatNumber>
                             </Stat>
-                            <Stat>
+                            <Stat px={2}>
                                 <StatLabel>Total Volume</StatLabel>
                                 <StatNumber>${coin.total_volume.toLocaleString()}</StatNumber>
+                            </Stat>
+                            <Stat px={2}>
+                                <StatLabel>24hr Change (USD)</StatLabel>
+                                <StatNumber>{coin.price_change_24h}</StatNumber>
+                                <StatHelpText> {coin.price_change_percentage_24h > 0 ? <StatArrow type='increase' /> : <StatArrow type='decrease' />}{coin.price_change_percentage_24h}%</StatHelpText>
                             </Stat>
                         </StatGroup>
                     </Box>

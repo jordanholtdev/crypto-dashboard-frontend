@@ -11,6 +11,7 @@ class Header extends React.Component {
                 <Flex>
                     <Link p={2} as={RouterLink} to='/'>Coin Price</Link>
                     <Link p={2} as={RouterLink} to='/info'>Coin Info</Link>
+                    <Link p={2} as={RouterLink} to='/portfolio'>Portfolio</Link>
                 </Flex>
             </Box>
         )
