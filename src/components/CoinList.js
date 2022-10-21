@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchCoins } from "../actions";
+import { fetchCoins, renderDate } from "../actions";
 import Loading from "./Loading";
 import {
     Box,
@@ -28,19 +28,6 @@ class CoinList extends React.Component {
         });
     }
 
-    renderDate = (date) => {
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            timeZone: 'UTC',
-            hour: 'numeric'
-        }
-        const formatDate = new Date(date)
-        return formatDate.toLocaleString('en-US', options)
-    }
-
     renderList() {
         return this.state.coins.map((coin) => {
             return (
@@ -54,7 +41,7 @@ class CoinList extends React.Component {
                             <Stat px={2}>
                                 <StatLabel>Price (USD)</StatLabel>
                                 <StatNumber>${coin.price_usd}</StatNumber>
-                                <StatHelpText>{this.renderDate(coin.created_date)}</StatHelpText>
+                                <StatHelpText>{renderDate(coin.created_date)}</StatHelpText>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Market Cap</StatLabel>
