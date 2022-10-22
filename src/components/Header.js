@@ -7,11 +7,12 @@ class Header extends React.Component {
     render() {
         return (
             <Box>
-                <Heading py={8} as='h1' size='3xl'>Crypto Dashboard</Heading>
-                <Flex>
-                    <Link p={2} as={RouterLink} to='/'>Coin Price</Link>
-                    <Link p={2} as={RouterLink} to='/info'>Coin Info</Link>
-                    <Link p={2} as={RouterLink} to='/portfolio'>Portfolio</Link>
+                <Heading py={8} as='h1' size='3xl' color='teal.600' >Crypto Dashboard</Heading>
+                <Flex justifyContent='center'>
+                    <Link color='teal.500' p={2} as={RouterLink} to='/'>Coin Price</Link>
+                    <Link color='teal.500' p={2} as={RouterLink} to='/portfolio'>Portfolio</Link>
+                    <Link color='teal.500' p={2} as={RouterLink} to='/charts'>Charts</Link>
+                    <Link color='teal.500' p={2} as={RouterLink} to='/info'>Coin Info</Link>
                 </Flex>
             </Box>
         )

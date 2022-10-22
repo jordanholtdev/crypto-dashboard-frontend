@@ -24,6 +24,13 @@ function Loading(props) {
                 endColor='green.200'
                 fadeDuration={1}
             />
+            <Skeleton
+                height='80px'
+                isLoaded={props.isLoaded}
+                startColor='gray.50'
+                endColor='green.200'
+                fadeDuration={1}
+            />
         </Stack>
     );
 }

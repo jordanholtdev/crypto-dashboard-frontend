@@ -34,27 +34,31 @@ class Portfolio extends React.Component {
 
         if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />
         return (
-            <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2' h='25em'>
-                <Text py='2' fontSize='2xl'>Holdings</Text>
-                <Text py='2' fontSize='md'>Account: {this.state.activity[0].user_name}</Text>
-                <HoldingsChart data={this.state.holdings} />
-                <TableContainer>
-                    <Table>
-                        <Thead>
-                            <Tr>
-                                <Th>Purchase Date</Th>
-                                <Th>Asset</Th>
-                                <Th>Amount</Th>
-                                <Th>Purchase Price</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            {this.renderList()}
-                        </Tbody>
-                    </Table>
-                </TableContainer>
+            <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
+                <Box h='25em'>
+                    <Text py='2' pl='5' fontSize='2xl'>Holdings</Text>
+                    <Text py='2' pl='5' fontSize='md'>Account: {this.state.activity[0].user_name}</Text>
+                    <HoldingsChart data={this.state.holdings} />
+                </Box>
+                <Box pt={4}>
+                    <Text py='5' pl='5' fontSize='2xl'>Activity</Text>
+                    <TableContainer>
+                        <Table variant='simple'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Purchase Date</Th>
+                                    <Th>Asset</Th>
+                                    <Th>Amount</Th>
+                                    <Th>Purchase Price</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {this.renderList()}
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </Box>
             </Box>
-
         )
     }
 };

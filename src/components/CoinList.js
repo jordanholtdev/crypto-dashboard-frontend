@@ -29,7 +29,7 @@ class CoinList extends React.Component {
     }
 
     renderList() {
-        return this.state.coins.map((coin) => {
+        return this.state.coins.slice(0, 10).map((coin) => {
             return (
                 <ListItem key={coin.id}>
                     <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
@@ -37,23 +37,23 @@ class CoinList extends React.Component {
                             <Stat>
                                 <Avatar size='xs' src={coin.image} />
                                 <Text paddingLeft={2} as='b' fontSize='md'>{coin.name}</Text>
-                            </Stat>
-                            <Stat px={2}>
-                                <StatLabel>Price (USD)</StatLabel>
-                                <StatNumber>${coin.price_usd}</StatNumber>
                                 <StatHelpText>{renderDate(coin.created_date)}</StatHelpText>
                             </Stat>
                             <Stat px={2}>
+                                <StatLabel>Price (USD)</StatLabel>
+                                <StatNumber fontSize='lg'>${coin.price_usd}</StatNumber>
+                            </Stat>
+                            <Stat px={2}>
                                 <StatLabel>Market Cap</StatLabel>
-                                <StatNumber>${coin.market_cap.toLocaleString()}</StatNumber>
+                                <StatNumber color='teal.600' fontSize='lg'>${coin.market_cap.toLocaleString()}</StatNumber>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Total Volume</StatLabel>
-                                <StatNumber>${coin.total_volume.toLocaleString()}</StatNumber>
+                                <StatNumber color='teal.600' fontSize='lg'>${coin.total_volume.toLocaleString()}</StatNumber>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>24hr Change (USD)</StatLabel>
-                                <StatNumber>{coin.price_change_24h}</StatNumber>
+                                <StatNumber color='teal.600' fontSize='lg'>{coin.price_change_24h}</StatNumber>
                                 <StatHelpText> {coin.price_change_percentage_24h > 0 ? <StatArrow type='increase' /> : <StatArrow type='decrease' />}{coin.price_change_percentage_24h}%</StatHelpText>
                             </Stat>
                         </StatGroup>

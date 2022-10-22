@@ -1,5 +1,14 @@
 import coins from '../apis/coins';
 
+export const fetchCoin = async (id) => {
+    const response = await coins.get('/coin', {
+        params: {
+            id: id
+        }
+    })
+    return response.data;
+};
+
 export const fetchCoins = async () => {
     const response = await coins.get('/coins')
     return response.data;
