@@ -36,7 +36,7 @@ class Portfolio extends React.Component {
         return (
             <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
                 <Box h='25em'>
-                    <Text py='2' pl='5' fontSize='2xl'>Holdings</Text>
+                    <Text py='2' pl='5' fontSize='2xl'>Portfolio</Text>
                     <Text py='2' pl='5' fontSize='md'>Account: {this.state.activity[0].user_name}</Text>
                     <HoldingsChart data={this.state.holdings} />
                 </Box>

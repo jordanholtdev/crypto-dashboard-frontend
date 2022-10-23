@@ -23,7 +23,6 @@ class PriceChart extends PureComponent {
                     <Tooltip />
                     <Legend />
                     <Line type="monotone" dataKey="price_usd" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dataKey="price_change_24h" stroke="#82ca9d" />
                 </LineChart>
             </ResponsiveContainer>
         );

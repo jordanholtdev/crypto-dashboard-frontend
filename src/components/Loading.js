@@ -1,37 +1,18 @@
-import { Stack, Skeleton } from '@chakra-ui/react'
+import { Center, Flex, Spinner } from '@chakra-ui/react'
 
 function Loading(props) {
     return (
-        <Stack m='2'>
-            <Skeleton
-                height='80px'
-                isLoaded={props.isLoaded}
-                startColor='gray.50'
-                endColor='green.200'
-                fadeDuration={1}
-            />
-            <Skeleton
-                height='80px'
-                isLoaded={props.isLoaded}
-                startColor='gray.50'
-                endColor='green.200'
-                fadeDuration={1}
-            />
-            <Skeleton
-                height='80px'
-                isLoaded={props.isLoaded}
-                startColor='gray.50'
-                endColor='green.200'
-                fadeDuration={1}
-            />
-            <Skeleton
-                height='80px'
-                isLoaded={props.isLoaded}
-                startColor='gray.50'
-                endColor='green.200'
-                fadeDuration={1}
-            />
-        </Stack>
+        <Flex justify='center' h='75vh'>
+            <Center>
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='teal.200'
+                    color='teal.500'
+                    size='xl'
+                />
+            </Center>
+        </Flex>
     );
 }
 

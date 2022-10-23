@@ -11,8 +11,6 @@ class Header extends React.Component {
                 <Flex justifyContent='center'>
                     <Link color='teal.500' p={2} as={RouterLink} to='/'>Coin Price</Link>
                     <Link color='teal.500' p={2} as={RouterLink} to='/portfolio'>Portfolio</Link>
-                    <Link color='teal.500' p={2} as={RouterLink} to='/charts'>Charts</Link>
-                    <Link color='teal.500' p={2} as={RouterLink} to='/info'>Coin Info</Link>
                 </Flex>
             </Box>
         )

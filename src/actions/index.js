@@ -14,8 +14,12 @@ export const fetchCoins = async () => {
     return response.data;
 };
 
-export const fetchCoinInfo = async () => {
-    const response = await coins.get('/coin/info')
+export const fetchCoinInfo = async (id) => {
+    const response = await coins.get('/coin/info', {
+        params: {
+            id: id
+        }
+    });
     return response.data;
 };
 
