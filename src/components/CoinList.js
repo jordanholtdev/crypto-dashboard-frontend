@@ -69,7 +69,6 @@ class CoinList extends React.Component {
                             <Stat>
                                 <Link onClick={() => this.onOpen(coin.coin_id)}><Avatar size='xs' src={coin.image} /></Link>
                                 <Text paddingLeft={2} as='b' fontSize='md'><Link onClick={() => this.onOpen(coin.coin_id)}>{coin.name}</Link></Text>
-                                <StatHelpText>{renderDate(coin.created_date)}</StatHelpText>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Price (USD)</StatLabel>
@@ -175,6 +174,7 @@ class CoinList extends React.Component {
         if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />
         return (
             <>
+                <Text fontWeight='semibold' m='2'>{renderDate(this.state.coins[0].created_date)}</Text>
                 <List>{this.renderList()}</List>
                 {this.state.info[0] ? (this.renderModal()) : null}
             </>
