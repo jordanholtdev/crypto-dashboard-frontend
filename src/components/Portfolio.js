@@ -12,10 +12,11 @@ class Portfolio extends React.Component {
             this.setState({
                 holdings: res.holdings,
                 activity: res.activity,
+                latestPrice: res.currentPrice,
                 isLoaded: true
             });
         });
-    }
+    };
 
     renderList() {
         return this.state.activity.map((entry) => {
@@ -30,14 +31,25 @@ class Portfolio extends React.Component {
         })
     }
 
-    render() {
+    calculateValue = (holdings) => {
+        let totalVal = 0;
+        holdings.forEach((e, i) => {
+            if (e.name === 'bitcoin') { totalVal += e.amount * 19021.38 }
+            if (e.name === 'ethereum') { totalVal += e.amount * 1278.164 }
+            if (e.name === 'cardano') { totalVal += e.amount * 0.341 }
+        })
 
+        return totalVal.toLocaleString();
+    };
+
+    render() {
         if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />
         return (
             <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
                 <Box h='25em'>
                     <Text py='2' pl='5' fontSize='2xl'>Portfolio</Text>
                     <Text py='2' pl='5' fontSize='md'>Account: {this.state.activity[0].user_name}</Text>
+                    <Text py='2' pl='5' fontSize='md'>Account Value: ${this.calculateValue(this.state.holdings)}</Text>
                     <HoldingsChart data={this.state.holdings} />
                 </Box>
                 <Box pt={4}>

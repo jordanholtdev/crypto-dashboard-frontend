@@ -88,9 +88,9 @@ class CoinList extends React.Component {
                                 <StatNumber color='teal.600' fontSize='lg'>{coin.price_change_24h}</StatNumber>
                                 <StatHelpText> {coin.price_change_percentage_24h > 0 ? <StatArrow type='increase' /> : <StatArrow type='decrease' />}{coin.price_change_percentage_24h}%</StatHelpText>
                             </Stat>
-                            <Box py='20' h='15em' w='80%'>
-                                <TinyChart coin={coin} />
-                            </Box>
+                            <Stat px={2}>
+                                <TinyChart coin={coin.coin_id} />
+                            </Stat>
                         </StatGroup>
                     </Box>
                 </ListItem>

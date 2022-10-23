@@ -1,4 +1,5 @@
 import coins from '../apis/coins';
+import gecko from '../apis/gecko';
 
 export const fetchCoin = async (id) => {
     const response = await coins.get('/coin', {
@@ -28,6 +29,22 @@ export const fetchPortfolioHoldings = async () => {
     return response.data
 };
 
+// fetch CoinGecko API data
+export const fetchCoinGecko = async (id) => {
+    const response = await gecko.get(`/coins/${id}`, {
+        params: {
+            localization: false,
+            market_data: true,
+            community_data: false,
+            developer_data: false,
+            sparkline: true
+        },
+        withCredentials: false
+    });
+    return response.data
+};
+
+// helper function for dates.
 export const renderDate = (date) => {
     const options = {
         weekday: 'long',
@@ -39,4 +56,4 @@ export const renderDate = (date) => {
     }
     const formatDate = new Date(date)
     return formatDate.toLocaleString('en-US', options)
-}
+};

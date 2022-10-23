@@ -1,29 +1,23 @@
 import React, { PureComponent } from 'react';
-import { fetchCoinInfo } from "../actions";
-import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
+import { fetchCoinGecko } from "../actions";
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 class TinyChart extends PureComponent {
-    state = { info: [], coinPrice: [] }
+    state = { sparklineData: [], }
 
     componentDidMount() {
-        fetchCoinInfo(this.props.coin.coin_id).then(res => {
-            console.log('api firing')
+        fetchCoinGecko(this.props.coin).then(res => {
             this.setState({
-                info: res.info,
-                coinPrice: res.price,
-            });
-            console.log(this.state.coinPrice)
+                sparklineData: res.market_data.sparkline_7d.price
+            })
         });
     };
 
     render() {
         return (
-            <ResponsiveContainer width="100%" height={700}>
-                <LineChart width={730} height={250} data={this.state.coinPrice}>
-                    <Line type="monotone" dataKey="price_usd" stroke="#48BB78" strokeWidth={2} isAnimationActive={false} />
-                    <Tooltip />
-                </LineChart>
-            </ResponsiveContainer>
+            <Sparklines data={this.state.sparklineData}>
+                <SparklinesLine color="teal" />
+            </Sparklines>
         );
     }
 };
