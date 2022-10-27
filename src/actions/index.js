@@ -4,29 +4,29 @@ import gecko from '../apis/gecko';
 export const fetchCoin = async (id) => {
     const response = await coins.get('/coin', {
         params: {
-            id: id
-        }
-    })
+            id: id,
+        },
+    });
     return response.data;
 };
 
 export const fetchCoins = async () => {
-    const response = await coins.get('/coins')
+    const response = await coins.get('/coins');
     return response.data;
 };
 
 export const fetchCoinInfo = async (id) => {
     const response = await coins.get('/coin/info', {
         params: {
-            id: id
-        }
+            id: id,
+        },
     });
     return response.data;
 };
 
 export const fetchPortfolioHoldings = async () => {
-    const response = await coins.get('/portfolio')
-    return response.data
+    const response = await coins.get('/portfolio');
+    return response.data;
 };
 
 // fetch CoinGecko API data
@@ -37,11 +37,11 @@ export const fetchCoinGecko = async (id) => {
             market_data: true,
             community_data: false,
             developer_data: false,
-            sparkline: true
+            sparkline: true,
         },
-        withCredentials: false
+        withCredentials: false,
     });
-    return response.data
+    return response.data;
 };
 
 // helper function for dates.
@@ -52,8 +52,8 @@ export const renderDate = (date) => {
         month: 'long',
         day: 'numeric',
         timeZone: 'UTC',
-        hour: 'numeric'
-    }
-    const formatDate = new Date(date)
-    return formatDate.toLocaleString('en-US', options)
+        hour: 'numeric',
+    };
+    const formatDate = new Date(date);
+    return formatDate.toLocaleString('en-US', options);
 };

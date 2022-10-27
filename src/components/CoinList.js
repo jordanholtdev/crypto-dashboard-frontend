@@ -1,9 +1,9 @@
-import React from "react";
-import { fetchCoins, renderDate, fetchCoinInfo } from "../actions";
-import PriceChart from "./PriceChart";
-import VolumeChart from "./VolumeChart";
-import TinyChart from "./TinyChart";
-import Loading from "./Loading";
+import React from 'react';
+import { fetchCoins, renderDate, fetchCoinInfo } from '../actions';
+import PriceChart from './PriceChart';
+import VolumeChart from './VolumeChart';
+import TinyChart from './TinyChart';
+import Loading from './Loading';
 import {
     Box,
     Badge,
@@ -27,48 +27,64 @@ import {
     ModalBody,
     ModalCloseButton,
     VStack,
-} from '@chakra-ui/react'
-
+} from '@chakra-ui/react';
 
 class CoinList extends React.Component {
-    state = { coins: [], prices: [], info: [], coinPrice: [], isLoaded: false, isOpen: false }
+    state = { coins: [], prices: [], info: [], coinPrice: [], isLoaded: false, isOpen: false };
 
     componentDidMount() {
-        fetchCoins().then(res => {
+        fetchCoins().then((res) => {
             this.setState({
                 coins: res.coins,
                 prices: res.prices,
-                isLoaded: true
+                isLoaded: true,
             });
-            console.log("prices", this.state.prices)
+            console.log('prices', this.state.prices);
         });
-    };
+    }
 
+    // modal onOpen logic
     onOpen(id) {
-        fetchCoinInfo(id).then(res => {
+        fetchCoinInfo(id).then((res) => {
             this.setState({
                 info: res.info,
                 coinPrice: res.price,
-                isOpen: true
+                isOpen: true,
             });
         });
-    };
+    }
 
     onClose() {
         this.setState({
-            isOpen: false
-        })
-    };
+            isOpen: false,
+        });
+    }
 
     renderList() {
+        // loop through the coin results and render each coin
+        // limiting the resultes to the first 10 (ordered by date). Query limits the results to 50
         return this.state.coins.slice(0, 10).map((coin) => {
             return (
                 <ListItem key={coin.id}>
-                    <Box border='1px' borderColor='gray.200' boxShadow='md' p='6' rounded='md' bg='white' m='2'>
+                    <Box
+                        border='1px'
+                        borderColor='gray.200'
+                        boxShadow='md'
+                        p='6'
+                        rounded='md'
+                        bg='white'
+                        m='2'
+                    >
                         <StatGroup>
                             <Stat>
-                                <Link onClick={() => this.onOpen(coin.coin_id)}><Avatar size='xs' src={coin.image} /></Link>
-                                <Text paddingLeft={2} as='b' fontSize='md'><Link onClick={() => this.onOpen(coin.coin_id)}>{coin.name}</Link></Text>
+                                <Link onClick={() => this.onOpen(coin.coin_id)}>
+                                    <Avatar size='xs' src={coin.image} />
+                                </Link>
+                                <Text paddingLeft={2} as='b' fontSize='md'>
+                                    <Link onClick={() => this.onOpen(coin.coin_id)}>
+                                        {coin.name}
+                                    </Link>
+                                </Text>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Price (USD)</StatLabel>
@@ -76,16 +92,30 @@ class CoinList extends React.Component {
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Market Cap</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>${coin.market_cap.toLocaleString()}</StatNumber>
+                                <StatNumber color='teal.600' fontSize='lg'>
+                                    ${coin.market_cap.toLocaleString()}
+                                </StatNumber>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>Total Volume</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>${coin.total_volume.toLocaleString()}</StatNumber>
+                                <StatNumber color='teal.600' fontSize='lg'>
+                                    ${coin.total_volume.toLocaleString()}
+                                </StatNumber>
                             </Stat>
                             <Stat px={2}>
                                 <StatLabel>24hr Change (USD)</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>{coin.price_change_24h}</StatNumber>
-                                <StatHelpText> {coin.price_change_percentage_24h > 0 ? <StatArrow type='increase' /> : <StatArrow type='decrease' />}{coin.price_change_percentage_24h}%</StatHelpText>
+                                <StatNumber color='teal.600' fontSize='lg'>
+                                    {coin.price_change_24h}
+                                </StatNumber>
+                                <StatHelpText>
+                                    {' '}
+                                    {coin.price_change_percentage_24h > 0 ? (
+                                        <StatArrow type='increase' />
+                                    ) : (
+                                        <StatArrow type='decrease' />
+                                    )}
+                                    {coin.price_change_percentage_24h}%
+                                </StatHelpText>
                             </Stat>
                             <Stat px={2}>
                                 <TinyChart coin={coin.coin_id} />
@@ -93,10 +123,11 @@ class CoinList extends React.Component {
                         </StatGroup>
                     </Box>
                 </ListItem>
-            )
-        })
-    };
+            );
+        });
+    }
 
+    // render the modal for each coin
     renderModal() {
         return (
             <>
@@ -107,7 +138,9 @@ class CoinList extends React.Component {
                         <ModalCloseButton />
                         <ModalBody>
                             <Avatar src={this.state.info[0].image} />
-                            <Text py='2' fontSize='2xl'>{this.state.info[0].name}</Text>
+                            <Text py='2' fontSize='2xl'>
+                                {this.state.info[0].name}
+                            </Text>
                             <Box pt='2'>
                                 <Box display='flex' alignItems='baseline'>
                                     <Badge borderRadius='full' px='2' colorScheme='green'>
@@ -135,17 +168,25 @@ class CoinList extends React.Component {
                                 </Box>
 
                                 <Box>
-                                    {this.state.info[0].genesis_date ? <Box as='span' color='gray.600' fontSize='sm'>
-                                        Genesis Date: {this.state.info[0].genesis_date}
-                                    </Box> : null}
+                                    {this.state.info[0].genesis_date ? (
+                                        <Box as='span' color='gray.600' fontSize='sm'>
+                                            Genesis Date: {this.state.info[0].genesis_date}
+                                        </Box>
+                                    ) : null}
                                 </Box>
                                 <Box display='flex' mt='2' alignItems='center'>
-                                    {this.state.info[0].hashing_algorithm ? <Box as='span' color='gray.600' fontSize='sm'>
-                                        Hashing Algo: {this.state.info[0].hashing_algorithm}
-                                    </Box> : null}
+                                    {this.state.info[0].hashing_algorithm ? (
+                                        <Box as='span' color='gray.600' fontSize='sm'>
+                                            Hashing Algo: {this.state.info[0].hashing_algorithm}
+                                        </Box>
+                                    ) : null}
                                 </Box>
                                 <Box pt='2'>
-                                    <Text dangerouslySetInnerHTML={{ __html: this.state.info[0].description }}></Text>
+                                    <Text
+                                        dangerouslySetInnerHTML={{
+                                            __html: this.state.info[0].description,
+                                        }}
+                                    ></Text>
                                 </Box>
                                 <VStack pt='50px'>
                                     <Box h='25em' py='20' w='full'>
@@ -166,19 +207,20 @@ class CoinList extends React.Component {
                     </ModalContent>
                 </Modal>
             </>
-        )
-    };
-
+        );
+    }
 
     render() {
-        if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />
+        if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />;
         return (
             <>
-                <Text fontWeight='semibold' m='2'>{renderDate(this.state.coins[0].created_date)}</Text>
+                <Text fontWeight='semibold' m='2'>
+                    {renderDate(this.state.coins[0].created_date)}
+                </Text>
                 <List>{this.renderList()}</List>
-                {this.state.info[0] ? (this.renderModal()) : null}
+                {this.state.info[0] ? this.renderModal() : null}
             </>
-        )
+        );
     }
 }
 
