@@ -80,34 +80,57 @@ class CoinList extends React.Component {
                                 <Link onClick={() => this.onOpen(coin.coin_id)}>
                                     <Avatar size='xs' src={coin.image} />
                                 </Link>
-                                <Text paddingLeft={2} as='b' fontSize='md'>
+                                <Text
+                                    paddingLeft={{ base: 1, md: 2, lg: 2 }}
+                                    as='b'
+                                    fontSize={{ base: 'xs', md: 'md', lg: 'lg' }}
+                                >
                                     <Link onClick={() => this.onOpen(coin.coin_id)}>
                                         {coin.name}
                                     </Link>
                                 </Text>
                             </Stat>
-                            <Stat px={2}>
-                                <StatLabel>Price (USD)</StatLabel>
-                                <StatNumber fontSize='lg'>${coin.price_usd}</StatNumber>
+                            <Stat px={{ base: 1, md: 2, lg: 2 }}>
+                                <StatLabel fontSize={{ base: 'xs', md: 'md', lg: 'md' }}>
+                                    Price (USD)
+                                </StatLabel>
+                                <StatNumber fontSize={{ base: 'xs', md: 'md', lg: 'lg' }}>
+                                    ${coin.price_usd}
+                                </StatNumber>
                             </Stat>
-                            <Stat px={2}>
-                                <StatLabel>Market Cap</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>
+                            <Stat px={{ base: 1, md: 2, lg: 2 }}>
+                                <StatLabel fontSize={{ base: 'xs', md: 'md', lg: 'md' }}>
+                                    Market Cap
+                                </StatLabel>
+                                <StatNumber
+                                    color='teal.600'
+                                    fontSize={{ base: 'xs', md: 'md', lg: 'lg' }}
+                                >
                                     ${coin.market_cap.toLocaleString()}
                                 </StatNumber>
                             </Stat>
-                            <Stat px={2}>
-                                <StatLabel>Total Volume</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>
+                            <Stat px={{ base: 1, md: 2, lg: 2 }}>
+                                <StatLabel fontSize={{ base: 'xs', md: 'md', lg: 'md' }}>
+                                    Total Volume
+                                </StatLabel>
+                                <StatNumber
+                                    color='teal.600'
+                                    fontSize={{ base: 'xs', md: 'md', lg: 'lg' }}
+                                >
                                     ${coin.total_volume.toLocaleString()}
                                 </StatNumber>
                             </Stat>
-                            <Stat px={2}>
-                                <StatLabel>24hr Change (USD)</StatLabel>
-                                <StatNumber color='teal.600' fontSize='lg'>
+                            <Stat px={{ base: 1, md: 2, lg: 2 }}>
+                                <StatLabel fontSize={{ base: 'xs', md: 'md', lg: 'md' }}>
+                                    24hr Change (USD)
+                                </StatLabel>
+                                <StatNumber
+                                    color='teal.600'
+                                    fontSize={{ base: 'xs', md: 'md', lg: 'lg' }}
+                                >
                                     {coin.price_change_24h}
                                 </StatNumber>
-                                <StatHelpText>
+                                <StatHelpText fontSize={{ base: 'xs', md: 'md', lg: 'md' }}>
                                     {' '}
                                     {coin.price_change_percentage_24h > 0 ? (
                                         <StatArrow type='increase' />
@@ -117,7 +140,7 @@ class CoinList extends React.Component {
                                     {coin.price_change_percentage_24h}%
                                 </StatHelpText>
                             </Stat>
-                            <Stat px={2}>
+                            <Stat px={{ base: 1, md: 2, lg: 2 }}>
                                 <TinyChart coin={coin.coin_id} />
                             </Stat>
                         </StatGroup>
