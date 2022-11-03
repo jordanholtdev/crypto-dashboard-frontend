@@ -57,3 +57,19 @@ export const renderDate = (date) => {
     const formatDate = new Date(date);
     return formatDate.toLocaleString('en-US', options);
 };
+
+// helper function for ledger / holdings dates
+export const ledgerDate = (date) => {
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    };
+    const formatDate = new Date(date);
+    return formatDate.toLocaleString('en-US', options);
+};
