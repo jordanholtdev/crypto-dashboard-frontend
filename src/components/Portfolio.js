@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPortfolioHoldings, renderDate } from '../actions/index';
+import { fetchPortfolioHoldings, ledgerDate } from '../actions/index';
 import HoldingsChart from './HoldingsChart';
 import Loading from './Loading';
 import { Box, Text, Table, TableContainer, Tbody, Tr, Th, Thead } from '@chakra-ui/react';
@@ -22,7 +22,7 @@ class Portfolio extends React.Component {
         return this.state.activity.map((entry) => {
             return (
                 <Tr key={entry.id}>
-                    <Th>{renderDate(entry.purchase_date)}</Th>
+                    <Th>{ledgerDate(entry.purchase_date)}</Th>
                     <Th>{entry.coin_id}</Th>
                     <Th>{entry.purchase_amount}</Th>
                     <Th>{entry.purchase_price}</Th>
