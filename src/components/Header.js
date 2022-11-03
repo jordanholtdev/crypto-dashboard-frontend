@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Heading, Box, Link, Flex } from '@chakra-ui/react';
+import { Heading, Box, Flex, Button } from '@chakra-ui/react';
 
 class Header extends React.Component {
     render() {
@@ -10,12 +10,19 @@ class Header extends React.Component {
                     Crypto Dashboard
                 </Heading>
                 <Flex justifyContent='center'>
-                    <Link color='teal.500' p={2} as={RouterLink} to='/'>
+                    <Button colorScheme='teal' variant='outline' m={2} p={2} as={RouterLink} to='/'>
                         Coin Price
-                    </Link>
-                    <Link color='teal.500' p={2} as={RouterLink} to='/portfolio'>
+                    </Button>
+                    <Button
+                        colorScheme='teal'
+                        variant='outline'
+                        m={2}
+                        p={2}
+                        as={RouterLink}
+                        to='/portfolio'
+                    >
                         Portfolio
-                    </Link>
+                    </Button>
                 </Flex>
             </Box>
         );
