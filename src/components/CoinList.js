@@ -211,7 +211,7 @@ class CoinList extends React.Component {
                                         }}
                                     ></Text>
                                 </Box>
-                                <VStack pt='50px'>
+                                <VStack pt='15px'>
                                     <Box h='25em' py='20' w='full'>
                                         <PriceChart data={this.state.coinPrice} />
                                     </Box>
