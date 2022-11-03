@@ -26,6 +26,7 @@ class Portfolio extends React.Component {
                     <Th>{entry.coin_id}</Th>
                     <Th>{entry.purchase_amount}</Th>
                     <Th>{entry.purchase_price}</Th>
+                    <Th>{entry.purchase_price * entry.purchase_amount}</Th>
                 </Tr>
             );
         });
@@ -61,7 +62,7 @@ class Portfolio extends React.Component {
                 m='2'
             >
                 <Box h='25em'>
-                    <Text py='2' pl='5' fontSize='2xl'>
+                    <Text py='2' pl='5' fontSize='2xl' as='h1' color='teal.400'>
                         Portfolio
                     </Text>
                     <Text py='2' pl='5' fontSize='md'>
@@ -73,17 +74,18 @@ class Portfolio extends React.Component {
                     <HoldingsChart data={this.state.holdings} />
                 </Box>
                 <Box pt={4}>
-                    <Text py='5' pl='5' fontSize='2xl'>
+                    <Text py='5' pl='5' fontSize='2xl' color='teal.400'>
                         Activity
                     </Text>
                     <TableContainer>
-                        <Table variant='simple'>
+                        <Table variant='simple' colorScheme='linkedin'>
                             <Thead>
                                 <Tr>
                                     <Th>Purchase Date</Th>
                                     <Th>Asset</Th>
                                     <Th>Amount</Th>
                                     <Th>Purchase Price</Th>
+                                    <Th>Purchase Cost</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>{this.renderList()}</Tbody>
