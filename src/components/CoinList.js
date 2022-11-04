@@ -39,7 +39,6 @@ class CoinList extends React.Component {
                 prices: res.prices,
                 isLoaded: true,
             });
-            console.log('prices', this.state.prices);
         });
     }
 
@@ -52,12 +51,24 @@ class CoinList extends React.Component {
                 isOpen: true,
             });
         });
+        console.log('prices', this.state.coinPrice);
     }
 
     onClose() {
         this.setState({
             isOpen: false,
         });
+    }
+
+    // transform price data for ReCharts
+    transformPriceData(arr) {
+        const result = arr.map(({ price_usd, created_date, price_change_24h }) => ({
+            price: price_usd,
+            date: renderDate(created_date),
+            change: price_change_24h,
+        }));
+        console.log(result);
+        return result;
     }
 
     renderList() {
@@ -213,10 +224,14 @@ class CoinList extends React.Component {
                                 </Box>
                                 <VStack pt='15px'>
                                     <Box h='25em' py='20' w='full'>
-                                        <PriceChart data={this.state.coinPrice} />
+                                        <PriceChart
+                                            data={this.transformPriceData(this.state.coinPrice)}
+                                        />
                                     </Box>
                                     <Box h='25em' w='full'>
-                                        <VolumeChart data={this.state.coinPrice} />
+                                        <VolumeChart
+                                            data={this.transformPriceData(this.state.coinPrice)}
+                                        />
                                     </Box>
                                 </VStack>
                             </Box>

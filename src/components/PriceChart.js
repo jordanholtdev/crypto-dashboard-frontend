@@ -25,16 +25,21 @@ class PriceChart extends PureComponent {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray='3 3' />
-                    <XAxis dataKey='created_date' />
-                    <YAxis dataKey='price_usd' />
+                    <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+                    <XAxis
+                        dataKey='date'
+                        label={{ value: 'Dates', position: 'insideBottomLeft', offset: 0 }}
+                        hide='true'
+                    />
+                    <YAxis dataKey='price' domain={['auto', 'dataMax']} />
                     <Tooltip />
-                    <Legend />
+                    <Legend verticalAlign='bottom' iconType='circle' />
                     <Line
                         type='monotone'
-                        dataKey='price_usd'
-                        stroke='#8884d8'
-                        activeDot={{ r: 8 }}
+                        dataKey='price'
+                        stroke='#2c7a7b'
+                        dot={{ stroke: 'teal', strokeWidth: 1 }}
+                        activeDot={{ stroke: 'teal', strokeWidth: 2, r: 10 }}
                     />
                 </LineChart>
             </ResponsiveContainer>
