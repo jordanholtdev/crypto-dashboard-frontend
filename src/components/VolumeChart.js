@@ -26,13 +26,13 @@ class VolumeChart extends PureComponent {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray='3 3' />
-                    <XAxis dataKey='created_date' />
-                    <YAxis />
+                    <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+                    <XAxis dataKey='date' hide='true' />
+                    <YAxis dataKey='change' domain={['auto', 'auto']} />
                     <Tooltip />
                     <Legend />
                     <ReferenceLine y={0} stroke='#000' />
-                    <Bar dataKey='price_change_24h' fill='#8884d8' />
+                    <Bar dataKey='change' fill='#8884d8' />
                 </BarChart>
             </ResponsiveContainer>
         );
