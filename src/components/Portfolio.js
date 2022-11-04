@@ -18,36 +18,65 @@ class Portfolio extends React.Component {
         });
     }
 
-    renderList() {
+    // get the latest price of an asset
+    fetchLatestPrice(asset) {
+        let latPrice = 0;
+        this.state.latestPrice.forEach((price) => {
+            if (price.coin_id === asset.name) {
+                latPrice = price.price_usd;
+            }
+        });
+        return latPrice;
+    }
+
+    // calculate the current value of an asset
+    calculateCurrentValue(asset) {
+        let val = 0;
+        this.state.latestPrice.forEach((price) => {
+            if (price.coin_id === asset.name) {
+                val = price.price_usd * asset.amount;
+            }
+        });
+        return val;
+    }
+
+    // calculate total account Value: $799,413.856
+    calculateValue = (holdings) => {
+        let totalVal = 0;
+        holdings.forEach((e, i) => {
+            totalVal += this.calculateCurrentValue(e);
+        });
+        return totalVal.toLocaleString();
+    };
+
+    // render the holdings table
+    renderHoldingsList() {
+        return this.state.holdings.map((asset) => {
+            return (
+                <Tr key={asset.amount}>
+                    <Th>{asset.name}</Th>
+                    <Th>{asset.amount}</Th>
+                    <Th>{this.calculateCurrentValue(asset).toLocaleString()}</Th>
+                    <Th>$ {this.fetchLatestPrice(asset).toLocaleString()}</Th>
+                </Tr>
+            );
+        });
+    }
+
+    // render the activity / ledger table
+    renderActivityList() {
         return this.state.activity.map((entry) => {
             return (
                 <Tr key={entry.id}>
                     <Th>{ledgerDate(entry.purchase_date)}</Th>
                     <Th>{entry.coin_id}</Th>
                     <Th>{entry.purchase_amount}</Th>
-                    <Th>{entry.purchase_price}</Th>
+                    <Th>{entry.purchase_price.toLocaleString()}</Th>
                     <Th>{entry.purchase_price * entry.purchase_amount}</Th>
                 </Tr>
             );
         });
     }
-
-    calculateValue = (holdings) => {
-        let totalVal = 0;
-        holdings.forEach((e, i) => {
-            if (e.name === 'bitcoin') {
-                totalVal += e.amount * 19021.38;
-            }
-            if (e.name === 'ethereum') {
-                totalVal += e.amount * 1278.164;
-            }
-            if (e.name === 'cardano') {
-                totalVal += e.amount * 0.341;
-            }
-        });
-
-        return totalVal.toLocaleString();
-    };
 
     render() {
         if (this.state.isLoaded === false) return <Loading isLoaded={this.state.isLoaded} />;
@@ -62,7 +91,7 @@ class Portfolio extends React.Component {
                 m='2'
             >
                 <Box h='25em'>
-                    <Text py='2' pl='5' fontSize='2xl' as='h1' color='teal.400'>
+                    <Text py='2' pl='5' fontSize='4xl' as='h1' color='teal.400'>
                         Portfolio
                     </Text>
                     <Text py='2' pl='5' fontSize='md'>
@@ -73,6 +102,26 @@ class Portfolio extends React.Component {
                     </Text>
                     <HoldingsChart data={this.state.holdings} />
                 </Box>
+                {/* Holdings table */}
+                <Box pt={4}>
+                    <Text py='5' pl='5' fontSize='2xl' color='teal.400'>
+                        Holdings
+                    </Text>
+                    <TableContainer>
+                        <Table variant='simple' colorScheme='linkedin'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Asset</Th>
+                                    <Th>Amount</Th>
+                                    <Th>Current Value</Th>
+                                    <Th>Current Price</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>{this.renderHoldingsList()}</Tbody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+                {/* Activity list */}
                 <Box pt={4}>
                     <Text py='5' pl='5' fontSize='2xl' color='teal.400'>
                         Activity
@@ -88,7 +137,7 @@ class Portfolio extends React.Component {
                                     <Th>Purchase Cost</Th>
                                 </Tr>
                             </Thead>
-                            <Tbody>{this.renderList()}</Tbody>
+                            <Tbody>{this.renderActivityList()}</Tbody>
                         </Table>
                     </TableContainer>
                 </Box>
